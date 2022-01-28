@@ -38,7 +38,11 @@ public class Focus : MonoBehaviour
                         hit.collider.transform.gameObject.GetComponent<Interactable>().DoInteraction();
                     }           
                 }
-            } else { InteractionText.text = null; }
+            } else { InteractionText.text = string.Empty; }
+        }
+        else
+        {
+            InteractionText.text = string.Empty;
         }
     }
 }
