@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -17,10 +18,14 @@ public class InventoryManager : MonoBehaviour
 
     public List<Item> Inventory = new List<Item>();
     [SerializeField] private int InventorySlots = 8;
+    public UnityEvent OnItemAdded;
+
+    private void Start() { if (OnItemAdded == null) { OnItemAdded = new UnityEvent(); }         }
 
     public void AddItem(Item item) {
         if(Inventory.Count < InventorySlots) {
             Inventory.Add(item);
+            OnItemAdded.Invoke();
         }
     }
 
