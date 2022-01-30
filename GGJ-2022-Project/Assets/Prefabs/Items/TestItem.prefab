@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 6048027210130982053}
   - component: {fileID: 694193147540975971}
   - component: {fileID: 8664742104816721543}
-  m_Layer: 0
+  - component: {fileID: 4896253732420212476}
+  m_Layer: 7
   m_Name: TestItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,4 +112,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PromptLine: Test Prompt
   radius: 5
-  Item: {fileID: 0}
+  Item: {fileID: 11400000, guid: 48990475dfe07ff4b80c620c3b2c55c9, type: 2}
+--- !u!54 &4896253732420212476
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4266399412336060792}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

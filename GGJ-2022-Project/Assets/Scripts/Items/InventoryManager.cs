@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -17,19 +16,31 @@ public class InventoryManager : MonoBehaviour
     #endregion
 
     public List<Item> Inventory = new List<Item>();
-    [SerializeField] private int InventorySlots = 8;
-    public UnityEvent OnItemAdded;
+    public int InventorySlots = 8;
 
-    private void Start() { if (OnItemAdded == null) { OnItemAdded = new UnityEvent(); }         }
+    public delegate void OnAddedItem(Item addedItem);
+    public static event OnAddedItem OnAddedItemCallback;
+
+    public delegate void OnRemovedItem(int removedItem);
+    public static event OnRemovedItem OnRemovedItemCallback;
 
     public void AddItem(Item item) {
         if(Inventory.Count < InventorySlots) {
             Inventory.Add(item);
-            OnItemAdded.Invoke();
+            if (OnAddedItemCallback != null) { OnAddedItemCallback(item); }
         }
     }
 
-    public void UseItem(int slot, Vector3 spawnLocation) {
+    [ContextMenu("Test Use")]
+    public void TestUse()
+    {
+        UseItem(0, new Vector3(0, 0, 0));
+    }
+
+    public GameObject UseItem(int slot, Vector3 spawnLocation) {
         GameObject placedItem = Instantiate(Inventory[slot].Prefab, spawnLocation, Quaternion.identity);
+        if (OnRemovedItemCallback != null) { OnRemovedItemCallback(slot); }
+        Inventory.RemoveAt(slot);
+        return placedItem;
     }
 }
